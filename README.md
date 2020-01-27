@@ -22,15 +22,15 @@ We require **XeTeX** for CJK font support and **BibTex** for publication and cit
 
 ### Key Concepts
 
-Curriculum Vitae/Résumés contain a `header`, `footer`, and many `section`s or `subsection`s. Each section/subsection contains many `entry`s. There are several kinds of `entry`s. Each of them has many formatted texts.
+Curriculum Vitae/Résumés contain a `header`, `footer`, and many `section`s or `subsections`. Each section/subsection contains many `components`. There are several kinds of `components`. Each of them has many formatted texts.
 
 All these components composed of a `BoundingBox` that defines its padding and a `Style` that defines the font size, color, fontshape, prefix/surfix of the text. Each component that contains sub-components also need to organize the position of the sub-components.
 
-Moreover, the contents of a CV/Resume usually contains contents such as `Education`, `Work Experience`. This contents are displayed using the `section`s and `entry`s.
+Moreover, the contents of a CV/Resume usually contains contents such as `Education`, `Work Experience`. This contents are displayed using the `sections` and `components`.
 
-Thus, we first develop a `core` library to provide a flexible way of defining `entry` library that contains the definition `header`, `footer`, `section`, `subsection`, and different kind of `entry`s.
+Thus, we first develop a `core` library to provide a flexible way of defining `component` library that contains the definition `header`, `footer`, `section`, `subsection`, and different kind of `components`.
 
-Then, we can further define a `format` library to define how to store different kind of contents and how to display them with `entry` library.
+Then, we can further define a `format` library to define how to store different kind of contents and how to display them with `component` library.
 
 Next, users can define their information with the `format` library. These information can be reused for different CV/resumes.
 
@@ -40,7 +40,7 @@ Finally, users can write the main tex file that defines which contents to be dis
 
 TODO
 
-### Entry Library
+### Component Library
 
 TODO
 

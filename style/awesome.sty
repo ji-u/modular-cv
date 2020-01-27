@@ -1,0 +1,52 @@
+\RequirePackage{fontawesome5}
+\RequirePackage{academicons}
+% colors
+\definecolor{darkgray}{HTML}{333333}
+\definecolor{gray}{HTML}{5D5D5D}
+\definecolor{lightgray}{HTML}{999999}
+% awesome colors from awesome-cv project
+\definecolor{awesome-emerald}{HTML}{00A388}
+\definecolor{awesome-skyblue}{HTML}{0395DE}
+\definecolor{awesome-red}{HTML}{DC3522}
+\definecolor{awesome-pink}{HTML}{EF4089}
+\definecolor{awesome-orange}{HTML}{FF6138}
+\definecolor{awesome-nephritis}{HTML}{27AE60}
+\definecolor{awesome-concrete}{HTML}{95A5A6}
+\definecolor{awesome-darknight}{HTML}{131A28}
+% tsinghua purple
+\definecolor{tsinghua-purple}{HTML}{660874}
+% set colors
+\colorlet{normal}   {darkgray}
+\colorlet{light}    {gray}
+\colorlet{lighter}  {lightgray}
+\colorlet{theme}    {tsinghua-purple}
+% set styles
+\setStyle{name}{fontsize}{32pt}
+\setStyle{firstname}{color}{light}
+\setStyle{lastname}{fontshape}{\bfseries}
+\updateStyle{role}{8pt, {}, \scshape, theme}
+\updateStyle{address}{8pt, {}, \itshape, lighter}
+\setStyle{socials}{fontsize}{8pt}
+\updateStyle{footer}{8pt, {}, \scshape, lighter}
+
+\newSocialIcon{Email}{\faEnvelope}
+\newSocialIcon{Phone}{\faPhone}
+\newSocialIcon{Homepage}{\faHome}
+\newSocialIcon{Googlescholar}{\aiGoogleScholar}
+\newSocialIcon{Github}{\faGithub}
+\newSocialIcon{GoogleScholar}{\aiGoogleScholar}
+
+\def\awesomestyle#1#2#3#4{%
+    {\color{theme}#1#2#3#4}%
+}
+% awesome vertical line
+\def\awesomeline{\leavevmode\leaders\hrule\@height1pt\hfill \kern\z@}
+\updateStyle{section}{16pt, {}, \bfseries,  {}, \awesomestyle, \awesomeline}
+\updateBox{section}{v, 2ex, 1ex}
+\updateStyle{subsection}{12pt, {}, \bfseries\scshape}
+\updateBox{subsection}{v, 1ex, .5ex}
+\updateBox{entry}{v, .5ex, 0ex}
+\updateStyle{entrytitle}{12pt, {}, \bfseries}
+\updateStyle{entrysubtitle}{10pt, {}, \scshape, light}
+\updateStyle{entrycomment}{10pt, {}, \slshape, theme}
+\updateStyle{entrysubcomment}{10pt, {}, \slshape, light}
