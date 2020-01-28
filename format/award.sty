@@ -1,0 +1,15 @@
+\definesheet{Award}{
+    award,
+    agency,
+    description,
+    date
+}
+
+\newcommand\makeAward{
+    \loopAward{
+        \entry{\loopv{award}, \loopv{agency}}[\loopv{date}]
+        \begin{itemize}
+            \item \loopv{description}.
+        \end{itemize}
+    }
+}

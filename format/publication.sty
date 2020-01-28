@@ -1,0 +1,211 @@
+\definesheet{Publication}{
+    % 'conference', 'journal', 'workshop', 'poster', 'workinprogress', 'underreview'.
+    type,
+    title,
+    authors,
+    % conference/journal/workshop full name
+    booktitle,
+    % abbr for <booktitle>
+    abbr,
+    % publish year/month/day (priority date for patent)
+    year,
+    month,
+    day,
+    % optional for journal {
+    volumn,
+    number,
+    pages,
+    % }
+    % optional for patent {
+    grantyear,
+    grantmonth,
+    grantday,
+    % }
+}
+
+% conference
+\newcommand\newConference[7]{%
+    \newPublication{#1}{%
+        {conference},%
+        {#2}, % title
+        {#3}, % author list
+        {#4}, % conference name
+        {#5}, % conference abbr
+        {#6}, % year
+        {#7}, % month
+    }    
+}
+
+% journal
+\newcommand\newJournal[7]{%
+    \newPublication{#1}{%
+        {journal},%
+        {#2}, % title
+        {#3}, % author list
+        {#4}, % journal name
+        {#5}, % journal abbr
+        {#6}, % year
+        {#7}, % month
+    }%
+    \continue@newJournal{#1}%
+}
+\newcommand\continue@newJournal[4]{%
+    \setPublication{#1}{volumn}{#2}%
+    \setPublication{#1}{number}{#3}%
+    \setPublication{#1}{pages}{#4}%
+}
+
+% poster
+\newcommand\newPoster[7]{%
+    \newPublication{#1}{%
+        {poster},%
+        {#2}, % title
+        {#3}, % author list
+        {#4}, % conference name
+        {#5}, % conference abbr
+        {#6}, % year
+        {#7}, % month
+    }%
+}
+
+% workshop
+\newcommand\newWorkshop[7]{%
+    \newPublication{#1}{%
+        {workshop},%
+        {#2}, % title
+        {#3}, % author list
+        {#4}, % workshop name
+        {#5}, % workshop abbr
+        {#6}, % year
+        {#7}, % month
+    }%
+}
+
+% underreview
+\newcommand\newUnderReview[6]{%
+    \newPublication{#1}{%
+        {underreview},%
+        {#2}, % title
+        {#3}, % author list
+        {#4}, % conf/journal name
+        {#5}, % conf/journal abbr
+        {#6}, % year
+    }%
+}
+
+% work in progress
+\newcommand\newWorkInProgress[6]{%
+    \newPublication{#1}{%
+        {workinprogress},%
+        {#2}, % title
+        {#3}, % author list
+        {#4}, % conf/journal name
+        {#5}, % conf/journal abbr
+        {#6}, % year
+    }%
+}
+
+% patent
+\newcommand\newPatent[7]{%
+    \newPublication{#1}{%
+        {patent},%
+        {#2}, % title
+        {#3}, % author list
+        {#4}, % patent number
+        {},%
+        {#5}, % year
+        {#6}, % month
+        {#7}, % day
+    }%
+    \continue@newPatent{#1}%
+}
+\NewDocumentCommand\continue@newPatent{mG{}G{}G{}}{
+    \setPublication{#1}{grantyear}{#2} % grant year
+    \setPublication{#1}{grantmonth}{#3} % grant month
+    \setPublication{#1}{grantday}{#4} % grant day
+}
+
+% identify me in the author list
+\definestyle{me}
+\newcommand\makeme[1]{\mestyle{#1}}
+\setStyle{me}{fontshape}{\bfseries}
+% pub content
+\newcommand\makepublicationitem[2]{
+    [#1] \pubtitle.\\
+    {\color{light}\pubauthors.}\\
+    {\color{light}#2.}
+}
+\def\shortyear#1{\expandafter\shortyearhelper#1}
+\def\shortyearhelper#1#2#3#4{#3#4}
+\newcommand\makethepublication{
+    \ifthenelse{\equal{\pubtype}{conference}}{
+        \makepublicationitem
+        {\pubabbr'\shortyear\pubyear}
+        {\textit{\pubbooktitle}, \pubyear}
+    }{\ifthenelse{\equal{\pubtype}{journal}}{
+        \makepublicationitem
+        {\pubabbr'\shortyear\pubyear}
+        {\textit{\pubbooktitle} \pubvolumn\IfEmptyF{\pubnumber}{(\pubnumber)}: \pubpages}
+    }{\ifthenelse{\equal{\pubtype}{workshop}}{
+        \makepublicationitem
+        {\pubabbr'\shortyear\pubyear}
+        {\textit{\pubbooktitle}, \pubyear}
+    }{\ifthenelse{\equal{\pubtype}{poster}}{
+        \makepublicationitem
+        {\pubabbr'\shortyear\pubyear}
+        {\textit{\pubbooktitle}, \pubyear (Poster)}
+    }{\ifthenelse{\equal{\pubtype}{underreview}}{
+        \makepublicationitem
+        {\pubabbr-Review}
+        {Submit to \textit{\pubbooktitle}, \pubyear}
+    }{\ifthenelse{\equal{\pubtype}{workinprogress}}{
+        \makepublicationitem
+        {\pubabbr-WIP}
+        {Target to \textit{\pubbooktitle}, \pubyear}
+    }{\ifthenelse{\equal{\pubtype}{patent}}{
+        \makepublicationitem
+        {\IfEmptyTF{\pubgrantyear}{Published}{Granted}}
+        {%
+            \textit{\pubbooktitle}%
+            ~~·~~Priority \pubyear-\pubmonth-\pubday%
+            \IfEmptyF{\pubgrantyear}{~~·~~Granted \pubgrantyear-\pubgrantmonth-\pubgrantday}%
+        }%
+    }{}}}}}}}
+}
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+\newcounter{pub@counter}
+\definemap{pub@printed}
+\NewDocumentCommand\makePublication{o}{%
+    \begin{thebibliography}{9}%
+        \setcounter{enumiv}{\value{pub@counter}}%
+        \loopPublication{%
+            \edef\pubkey{\loopk}%
+            \edef\pubtype{\loopv{type}}%
+            \edef\pubtitle{\loopv{title}}%
+            \def\pubauthors{\loopv{authors}}%
+            \edef\pubbooktitle{\loopv{booktitle}}%
+            \edef\pubabbr{\loopv{abbr}}%
+            \edef\pubyear{\loopv{year}}%
+            \edef\pubmonth{\loopv{month}}%
+            \edef\pubday{\loopv{day}}
+            \edef\pubvolumn{\loopv{volumn}}%
+            \edef\pubnumber{\loopv{number}}%
+            \edef\pubpages{\loopv{pages}}%
+            \edef\pubgrantyear{\loopv{grantyear}}%
+            \edef\pubgrantmonth{\loopv{grantmonth}}%
+            \edef\pubgrantday{\loopv{grantday}}%
+            \ifthenelse{\equal{\getpub@printed{\pubkey}}{true}}{}{%
+                \IfNoValueTF{#1}{%
+                    \bibitem{\pubkey} \makethepublication%
+                    \newpub@printed{\pubkey}{true}%
+                }{%
+                    \ifthenelse{#1}{%
+                        \bibitem{\pubkey} \makethepublication%
+                        \newpub@printed{\pubkey}{true}%
+                    }{}%
+                }%
+            }
+        }%
+        \setcounter{pub@counter}{\value{enumiv}}%
+    \end{thebibliography}%
+}

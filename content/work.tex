@@ -1,0 +1,21 @@
+\useformat{work}
+
+\newWorkExperience{company}{
+    {Company Inc.}, % company name
+    {Group Name}, % group name
+    {Research Intern}, % role in the company
+    {Beijing, China}, % location
+    {June 2018}, % begin date
+    {Sept. 2018}, % end date
+    % duties
+    {% any number of duties
+        {Brief describe the first duty during the job},
+        {Brief describe the second duty during the job}
+    },
+    % achievements
+    {% any number of achievements
+        {Improve xxxx by xxxx},
+        % if use \cite or other commands, add a \noexpand before to protect it
+        {Apply 2 patents~\noexpand\cite{patentexample1,patentexample2}}
+    }
+}

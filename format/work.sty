@@ -1,0 +1,28 @@
+\RequirePackage{xparse}
+\definesheet{WorkExperience}{
+    company,
+    group,
+    role,
+    location,
+    begin,
+    end,
+    duties,
+    achievements,
+    highlights,
+}
+
+\newcommand\makeWorkExperience{
+    \loopWorkExperience{
+        \edef\theduties{\loopv{duties}}
+        \edef\theachievements{\loopv{achievements}}
+        \edef\thehighlights{\loopv{highlights}}
+        \entry
+        {\loopv{company}, \loopv{group}}[\loopv{begin} -- \loopv{end}]
+        {\loopv{role}}[\loopv{location}]
+        \begin{itemize}
+            \items{\theduties}
+            \items{\theachievements}
+            \IfEmptyF{\thehighlights}{\items{\thehighlights}}
+        \end{itemize}
+    }
+}

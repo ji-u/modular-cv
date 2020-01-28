@@ -1,0 +1,13 @@
+\definesheet{Teaching}{
+    course,
+    role,
+    school,
+    quater,
+    year,
+}
+
+\newcommand\makeTeaching{
+    \loopTeaching{
+        \entry{\loopv{role}, \loopv{course}}[\loopv{quater}, \loopv{year}/\loopv{school}]
+    }
+}
