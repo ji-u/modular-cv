@@ -24,6 +24,7 @@
 \RequirePackage{xparse}
 % map data structure
 %----------------------------------------------------
+\newcommand\loopbreak{\let\iterate\relax}
 \newcounter{map@iterator}
 % create a map
 % usage: \definemap{<name>}
