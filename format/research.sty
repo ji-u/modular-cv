@@ -1,0 +1,21 @@
+\definesheet{ResearchExperience}{
+    project,
+    description,
+    highlights,
+    publications,
+    venues,
+    affiliation
+}
+
+\newcommand\makeResearchExperience{
+    \loopResearchExperience{
+        \edef\thepublications{\loopv{publications}}
+        \edef\thehighlights{\loopv{highlights}}
+        \entry{\loopv{project}}[\loopv{affiliation}]
+        \begin{itemize}
+            \item \loopv{description}.
+            \items{\thehighlights}
+            \item Publish \counts{\thepublications} papers~\cite{\thepublications} in top conferences/journals (\loopv{venues}).
+        \end{itemize}
+    }
+}

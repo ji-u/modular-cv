@@ -15,11 +15,42 @@
 \definecolor{awesome-darknight}{HTML}{131A28}
 % tsinghua purple
 \definecolor{tsinghua-purple}{HTML}{660874}
+\definefontfamily{sourcesanspro}[
+    Path=font/,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-It,
+    BoldItalicFont=*-BoldIt,
+]{SourceSansPro}
+\definefontfamily{sourcesansprolight}[
+    Path=font/,
+    UprightFont=*-Light,
+    BoldFont=*-SemiBold,
+    ItalicFont=*-LightIt,
+    BoldItalicFont=*-SemiBoldIt,
+]{SourceSansPro}
+\definefontfamily{sourceserifpro}[
+    Path=font/,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-It,
+    BoldItalicFont=*-BoldIt,
+]{SourceSerifPro}
+\definefontfamily{sourceserifprolight}[
+    Path=font/,
+    UprightFont=*-Light,
+    BoldFont=*-SemiBold,
+    ItalicFont=*-LightIt,
+    BoldItalicFont=*-SemiBoldIt,
+]{SourceSerifPro}
 % set colors
 \colorlet{normal}   {darkgray}
 \colorlet{light}    {gray}
 \colorlet{lighter}  {lightgray}
 \colorlet{theme}    {tsinghua-purple}
+% set font
+\setdefaultfontfamily{sourceserifpro}
+\setdefaultsansfamily{sourcesanspro}
 % set styles
 \setStyle{name}{fontsize}{32pt}
 \setStyle{firstname}{color}{light}

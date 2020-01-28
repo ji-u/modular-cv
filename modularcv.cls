@@ -41,11 +41,11 @@
 % usage: \map@insert{<name>}{<key>}{<value>}
 \newcommand\map@insert[3]{%
 	\map@set{#1}{#2}{#3}%
-	\expandafter\def\csname map@#1@key@\roman{map@#1@size}\endcsname{#2}%
+	\expandafter\gdef\csname map@#1@key@\roman{map@#1@size}\endcsname{#2}%
 	\stepcounter{map@#1@size}}
 % set the value of a existing key
 % usage: \map@set{<name>}{<key>}{<value>}
-\newcommand\map@set[3]{\expandafter\def\csname map@#1@val@#2\endcsname{#3}}
+\newcommand\map@set[3]{\expandafter\gdef\csname map@#1@val@#2\endcsname{#3}}
 % get the value of a existing key
 % usage: \map@get{<name>}{<key>}
 \newcommand\map@get[2]{%
@@ -73,7 +73,7 @@
 	\newcounter{sheet@#1@rows}%
 	\newcounter{sheet@#1@cols}%
 	\clist_map_inline:nn{#2}{%
-		\expandafter\def\csname%
+		\expandafter\gdef\csname%
 			sheet@#1@colkey@\roman{sheet@#1@cols}%
 		\endcsname{##1}%
 		\stepcounter{sheet@#1@cols}}%
@@ -91,7 +91,7 @@
 % insert a record in the sheet
 % usage: \sheet@insert{<name>}{<key>}{<colval-1>, ... , <colval-n>}
 \newcommand\sheet@insert[3]{%
-	\expandafter\def\csname%
+	\expandafter\gdef\csname%
 		sheet@#1@rowkey@\roman{sheet@#1@rows}%
 	\endcsname{#2}%
 	\stepcounter{sheet@#1@rows}%
@@ -102,21 +102,21 @@
 \newcommand\sheet@update[3]{%
 	\setcounter{sheet@col@iterator}{0}%
 	\loop\ifnum\value{sheet@col@iterator}<\value{sheet@#1@cols}%
-		\edef\@colkey{%
+		\xdef\@colkey{%
 			\csname sheet@#1@colkey@\roman{sheet@col@iterator}\endcsname}%
-		\expandafter\def\csname sheet@#1@row@#2@col@\@colkey\endcsname{}%
+		\expandafter\gdef\csname sheet@#1@row@#2@col@\@colkey\endcsname{}%
 		\stepcounter{sheet@col@iterator}\repeat%
 	\setcounter{sheet@col@iterator}{0}%
 	\clist_map_inline:nn{#3}{%
-		\edef\@colkey{%
+		\xdef\@colkey{%
 			\csname sheet@#1@colkey@\roman{sheet@col@iterator}\endcsname}%
-		\expandafter\def\csname sheet@#1@row@#2@col@\@colkey\endcsname{##1}%
+		\expandafter\gdef\csname sheet@#1@row@#2@col@\@colkey\endcsname{##1}%
 		\stepcounter{sheet@col@iterator}}}
 \ExplSyntaxOff
 % set an item in a record in the sheet
 % usage: \sheet@set{<name>}{<rowkey>}{<colkey>}{<value>}
 \newcommand\sheet@set[4]{%
-	\expandafter\def\csname sheet@#1@row@#2@col@#3\endcsname{#4}}
+	\expandafter\gdef\csname sheet@#1@row@#2@col@#3\endcsname{#4}}
 % get an item in a record in the sheet
 % usage: \sheet@get{<name>}{<rowkey>}{<colkey>}
 \newcommand\sheet@get[3]{%
@@ -161,8 +161,7 @@
 \colorlet{theme}{black}
 % font settings
 %----------------------------------------------------
-\RequirePackage{fontspec}
-\RequirePackage{xeCJK}
+\RequirePackage[quiet]{fontspec}
 \definesheet{FontFamily}{font, spec}
 % create a new font family
 % usage: \definefontfamily{<name>}[O<spec>]{<font>}
@@ -174,9 +173,7 @@
 		{\getFontFamily{#2}{font}},{\getFontFamily{#2}{spec}}}}
 % set default fonts
 \newcommand\setdefaultfontfamily[1]{\fontfamilylet{serif}{#1}}
-\newcommand\setdefaultCJKfontfamily[1]{\fontfamilylet{CJKserif}{#1}}
 \newcommand\setdefaultsansfamily[1]{\fontfamilylet{sans}{#1}}
-\newcommand\setdefaultCJKsansfamily[1]{\fontfamilylet{CJKsans}{#1}}
 % Configure default style
 %----------------------------------------------------
 \RequirePackage{etoolbox}
@@ -185,14 +182,10 @@
 \AtEndPreamble{\loopFontFamily{%
 	\ifthenelse{\equal{\loopk}{serif}}{%
 		\setmainfont[\loopv{spec}]{\loopv{font}}}{%
-	\ifthenelse{\equal{\loopk}{CJKserif}}{%
-		\setCJKmainfont[\loopv{spec}]{\loopv{font}}}{%
 	\ifthenelse{\equal{\loopk}{sans}}{%
 		\setsansfont[\loopv{spec}]{\loopv{font}}}{%
-	\ifthenelse{\equal{\loopk}{CJKsans}}{%
-		\setCJKsansfont[\loopv{spec}]{\loopv{font}}}{%
 		\expandafter\newfontfamily\csname\loopk\endcsname[%
-			\loopv{spec}]{\loopv{font}}}}}}}}
+			\loopv{spec}]{\loopv{font}}}}}}
 % component styles
 %----------------------------------------------------
 \definesheet{Style}{fontsize,font,fontshape,color,pre,post}
@@ -370,4 +363,14 @@
 %====================================================
 % Format Library
 %====================================================
+\ExplSyntaxOn
+\newcommand\counts[1]{
+	\clist_count:N{#1}
+}
+\newcommand\items[1]{
+    \clist_map_inline:Nn{#1}{
+        \item ##1.
+    }
+}
+\ExplSyntaxOff
 \newcommand\useformat[1]{\usepackage{format/#1}}

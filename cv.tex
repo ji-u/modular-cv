@@ -1,38 +1,52 @@
-\documentclass{modularcv}
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8 Unicode
+\documentclass[sans]{modularcv}
 \usestyle{awesome}
+
 \title{Yu Ji~~~·~~~Curriculum Vitae}
 
-\name{Yu}{Ji}
-\role{Ph.D. candidate in CS}
-\address{Room 8411, East Main Building, Tsinghua University, Beijing, China}
-\email{maple.jiyu@hotmail.com}
-\phone{(+86)18810301432}
-\googlescholar{UudJmAMAAAAJ}{Yu Ji}
-\github{ji-u}
-\homepage{http://mackler.me}
+\input{content/basicinfo.tex}
+\input{content/education.tex}
+\input{content/work.tex}
+\input{content/research.tex}
+\input{content/teaching.tex}
+\input{content/award.tex}
+\input{content/publication.tex}
 
 \begin{document}
+
 \makecvheader
 \makefooter
+
 \section{Education}
-\entry{Tsinghua University}[Sept. 2015 -- June 2020]{Ph.D. candidate in Computer Science}[Beiing, China]
-\begin{itemize}
-	\item Institude of High Performance Computing, Department of Computer Science and Technology
-	\item Advisor: Prof. Youhui Zhang
-\end{itemize}
-\entry{University of California, Santa Barbara}[Setp. 2017 -- Aug. 2018]{Visiting Scholar in Electrical and Computer Engineering}[Santa Barbara, California, United State]
-\begin{itemize}
-	\item Department of Electrical and Computer Engineering
-	\item Advisor: Prof. Yuan Xie
-\end{itemize}
-\entry{Tsinghua University}[Sept. 2011 -- July 2015]{B.S. in Physics}[Beijing China]
-\begin{itemize}
-	\item Department of Physics
-\end{itemize}
+\makeEducation
+
 \section{Work Experience}
+\makeWorkExperience
+
 \section{Research Experience}
+\makeResearchExperience
+
+\section{Teaching Experience}
+\makeTeaching
+
+\section{Award and Honor}
+\makeAward
+
 \section{Publication}
-\subsection{Full List}
+\subsection{Conference and Journal}
+\makePublication[{\equal{\pubtype}{conference} \OR \equal{\pubtype}{journal}}]
+
 \subsection{Under Review}
+\makePublication[\equal{\pubtype}{underreview}]
+
 \subsection{Work in Progress}
+\makePublication[\equal{\pubtype}{workinprogress}]
+
+\subsection{Workshop and Poster}
+\makePublication[{\equal{\pubtype}{poster} \OR \equal{\pubtype}{workshop}}]
+
+\subsection{Patent}
+\makePublication[\equal{\pubtype}{patent}]
+
 \end{document}

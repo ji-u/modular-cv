@@ -1,0 +1,22 @@
+\definesheet{Education}{
+    degree,
+    major,
+    school,
+    department,
+    location,
+    begin,
+    end,
+    advisor,
+}
+
+\newcommand\makeEducation{
+    \loopEducation{
+        \entry
+        {\loopv{school}}[\loopv{begin} -- \loopv{end}]
+        {\loopv{degree} in \loopv{major}}[\loopv{location}]
+        \begin{itemize}
+            \item \loopv{department}
+            \IfEmptyF{\loopv{advisor}}{\item Advisor: \loopv{advisor}}
+        \end{itemize}
+    }
+}
