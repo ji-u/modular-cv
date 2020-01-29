@@ -1,0 +1,13 @@
+\definesheet{TravelHistory}{
+    place,
+    nation,
+    time,
+    purpose
+}
+
+\newcommand\makeTravelHistory{
+    \loopTravelHistory{
+        \entry{[\loopv{nation}] \loopv{place}}[\loopv{time}]
+        \loopv{purpose}.
+    }
+}

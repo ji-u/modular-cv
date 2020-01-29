@@ -333,18 +333,23 @@
 }
 % section
 %----------------------------------------------------
-\definestyles{section, subsection}
-\definevboxes{section, subsection}
+\definestyles{section, subsection, subsubsection}
+\definevboxes{section, subsection, subsubsection}
 \RenewDocumentCommand\section{om}{%
 	\par\sectionbox{%
 		\phantomsection{}\addcontentsline{toc}{section}{#2}%
 		\IfNoValueTF{#1}{\sectionstyle{#2}}{\sectionstyle{#1~#2}}}%
-	\par\@afterheading}
+	\par\@afterheading\nopagebreak}
 \renewcommand\subsection[1]{%
 	\par\subsectionbox{%
 		\phantomsection{}\addcontentsline{toc}{subsection}{#1}%
 		\subsectionstyle{#1}}
-	\par\@afterheading}
+	\par\@afterheading\nopagebreak}
+\renewcommand\subsubsection[1]{%
+	\par\subsubsectionbox{%
+		\phantomsection{}\addcontentsline{toc}{subsubsection}{#1}%
+		\subsubsectionstyle{#1}}
+	\par\@afterheading\nopagebreak}
 % entry
 %----------------------------------------------------
 \RequirePackage{enumitem}
@@ -372,6 +377,11 @@
     \clist_map_inline:Nn{#1}{
         \item ##1.
     }
+}
+\definemap{Content}
+\newcommand\definecontent[2]{
+	\newContent{#1}{#2}
+	\expandafter\newcommand\csname make#1\endcsname{\getContent{#1}}
 }
 \ExplSyntaxOff
 \newcommand\useformat[1]{\usepackage{format/#1}}

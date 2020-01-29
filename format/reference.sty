@@ -1,0 +1,17 @@
+\definesheet{Reference}{
+    name,
+    title,
+    email,
+    department,
+    school
+}
+
+\newcommand\makeReference{
+    \loopReference{
+        \entry{\loopv{name}}
+        \IfEmptyTF{\getSocialIcon{Email}}{Email:~}{\getSocialIcon{Email}~}
+        \href{mailto:\loopv{email}}{\loopv{email}}\\
+        \loopv{title} in \loopv{school}\\
+        \loopv{department}
+    }
+}

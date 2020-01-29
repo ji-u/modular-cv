@@ -145,7 +145,7 @@
     }{\ifthenelse{\equal{\pubtype}{journal}}{
         \makepublicationitem
         {\pubabbr'\shortyear\pubyear}
-        {\textit{\pubbooktitle} \pubvolumn\IfEmptyF{\pubnumber}{(\pubnumber)}: \pubpages}
+        {\textit{\pubbooktitle} \pubvolumn\IfEmptyF{\pubnumber}{(\pubnumber)}: \pubpages, \pubyear}
     }{\ifthenelse{\equal{\pubtype}{workshop}}{
         \makepublicationitem
         {\pubabbr'\shortyear\pubyear}
@@ -176,7 +176,9 @@
 \newcounter{pub@counter}
 \definemap{pub@printed}
 \NewDocumentCommand\makePublication{o}{%
-    \begin{thebibliography}{9}%
+    \begin{thebibliography}{99}%
+        \setlength{\itemsep}{0em}
+        \setlength{\parskip}{.5em}
         \setcounter{enumiv}{\value{pub@counter}}%
         \loopPublication{%
             \edef\pubkey{\loopk}%

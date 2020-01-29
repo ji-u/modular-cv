@@ -7,9 +7,9 @@
 
 \newcommand\makeAward{
     \loopAward{
-        \entry{\loopv{award}, \loopv{agency}}[\loopv{date}]
-        \begin{itemize}
-            \item \loopv{description}.
-        \end{itemize}
+        \entry
+        {\loopv{award}}[\loopv{date}]
+        {\loopv{agency}}
+        \loopv{description}.
     }
 }

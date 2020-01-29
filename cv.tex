@@ -15,39 +15,17 @@
 \input{content/publication.tex}
 
 \begin{document}
-
 \makecvheader
 \makefooter
-
-\section{Education}
-\makeEducation
-
-\section{Research Experience}
-\makeResearchExperience
-
-\section{Work Experience}
-\makeWorkExperience
-
-\section{Teaching Experience}
-\makeTeaching
-
-\section{Award and Honor}
-\makeAward
-
+\section{Education}\makeEducation
+\section{Research Experience}\makeResearchExperience
+\section{Work Experience}\makeWorkExperience
+\section{Teaching Experience}\makeTeaching
+\section{Award and Honor}\makeAward
 \section{Publication}
-\subsection{Conference and Journal}
-\makePublication[{\equal{\pubtype}{conference} \OR \equal{\pubtype}{journal}}]
-
-\subsection{Under Review}
-\makePublication[\equal{\pubtype}{underreview}]
-
-\subsection{Work in Progress}
-\makePublication[\equal{\pubtype}{workinprogress}]
-
-\subsection{Workshop and Poster}
-\makePublication[{\equal{\pubtype}{poster} \OR \equal{\pubtype}{workshop}}]
-
-\subsection{Patent}
-\makePublication[\equal{\pubtype}{patent}]
-
+\subsection{Conference and Journal}\makePublication[{\equal{\pubtype}{conference} \OR \equal{\pubtype}{journal}}]
+\subsection{Under Review}\makePublication[\equal{\pubtype}{underreview}]
+\subsection{Work in Progress}\makePublication[\equal{\pubtype}{workinprogress}]
+\subsection{Workshop and Poster}\makePublication[{\equal{\pubtype}{poster} \OR \equal{\pubtype}{workshop}}]
+\subsection{Patent}\makePublication[\equal{\pubtype}{patent}]
 \end{document}

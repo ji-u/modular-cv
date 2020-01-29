@@ -74,7 +74,7 @@ Create a new education record in the content tex files
     {Tsinghua University},
     {Department of Computer Science and Technology},
     {Beijing, China},
-    {Sept. 2015},
+    {Sep. 2015},
     {June 2020},
     {Your advisor} % optional
 }
@@ -113,7 +113,7 @@ Create a work experience in the content tex files
     {role in the company},
     {location of the work},
     {June 2019},
-    {Sept. 2019},
+    {Sep. 2019},
     {
 		{Duty1 in the company},
 		{Duty2 in the company}
