@@ -163,6 +163,7 @@
 % font settings
 %----------------------------------------------------
 \RequirePackage[quiet]{fontspec}
+\RequirePackage{xeCJK}
 \definesheet{FontFamily}{font, spec}
 % create a new font family
 % usage: \definefontfamily{<name>}[O<spec>]{<font>}
@@ -174,7 +175,9 @@
 		{\getFontFamily{#2}{font}},{\getFontFamily{#2}{spec}}}}
 % set default fonts
 \newcommand\setdefaultfontfamily[1]{\fontfamilylet{serif}{#1}}
+\newcommand\setdefaultCJKfontfamily[1]{\fontfamilylet{CJKserif}{#1}}
 \newcommand\setdefaultsansfamily[1]{\fontfamilylet{sans}{#1}}
+\newcommand\setdefaultCJKsansfamily[1]{\fontfamilylet{CJKsans}{#1}}
 % Configure default style
 %----------------------------------------------------
 \RequirePackage{etoolbox}
@@ -185,8 +188,12 @@
 		\setmainfont[\loopv{spec}]{\loopv{font}}}{%
 	\ifthenelse{\equal{\loopk}{sans}}{%
 		\setsansfont[\loopv{spec}]{\loopv{font}}}{%
+	\ifthenelse{\equal{\loopk}{CJKserif}}{%
+		\setCJKmainfont[\loopv{spec}]{\loopv{font}}}{%
+	\ifthenelse{\equal{\loopk}{CJKsans}}{%
+		\setCJKsansfont[\loopv{spec}]{\loopv{font}}}{%
 		\expandafter\newfontfamily\csname\loopk\endcsname[%
-			\loopv{spec}]{\loopv{font}}}}}}
+			\loopv{spec}]{\loopv{font}}}}}}}}
 % component styles
 %----------------------------------------------------
 \definesheet{Style}{fontsize,font,fontshape,color,pre,post}
