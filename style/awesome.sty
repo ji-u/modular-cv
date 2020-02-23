@@ -43,6 +43,26 @@
     ItalicFont=*-LightIt,
     BoldItalicFont=*-SemiBoldIt,
 ]{SourceSerifPro}
+\definefontfamily{sourcehanserifpro}[
+    Path=font/,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+]{SourceHanSerifCN}
+\definefontfamily{sourcehanserifprolight}[
+    Path=font/,
+    UprightFont=*-Light,
+    BoldFont=*-SemiBold,
+]{SourceHanSerifCN}
+\definefontfamily{sourcehansanspro}[
+    Path=font/,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+]{SourceHanSansCN}
+\definefontfamily{sourcehansansprolight}[
+    Path=font/,
+    UprightFont=*-Light,
+    BoldFont=*-Medium,
+]{SourceHanSansCN}
 % set colors
 \colorlet{normal}   {darkgray}
 \colorlet{light}    {gray}
@@ -51,6 +71,8 @@
 % set font
 \setdefaultfontfamily{sourceserifpro}
 \setdefaultsansfamily{sourcesanspro}
+\setdefaultCJKfontfamily{sourcehanserifpro}
+\setdefaultCJKsansfamily{sourcehansanspro}
 % set styles
 \setStyle{name}{fontsize}{32pt}
 \setStyle{firstname}{color}{light}

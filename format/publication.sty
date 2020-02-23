@@ -145,7 +145,12 @@
     }{\ifthenelse{\equal{\pubtype}{journal}}{
         \makepublicationitem
         {\pubabbr'\shortyear\pubyear}
-        {\textit{\pubbooktitle} \pubvolumn\IfEmptyF{\pubnumber}{(\pubnumber)}: \pubpages, \pubyear}
+        {
+            \textit{\pubbooktitle}
+            \IfEmptyF{\pubvolumn}{~\pubvolumn}
+            \IfEmptyF{\pubnumber}{(\pubnumber)}
+            \IfEmptyF{\pubpages}{: \pubpages}, \pubyear
+        }
     }{\ifthenelse{\equal{\pubtype}{workshop}}{
         \makepublicationitem
         {\pubabbr'\shortyear\pubyear}
